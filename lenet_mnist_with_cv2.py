@@ -1,6 +1,6 @@
 #LeNet Driver Script
 #Kieran Hobden
-#20-Sep-'19
+#23-Sep-'19
 
 from lenet import LeNet
 from sklearn.model_selection import train_test_split
@@ -10,6 +10,7 @@ from keras.utils import np_utils
 from keras import backend as K
 import numpy as np
 import argparse
+import cv2
 
 #Construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -74,6 +75,23 @@ for i in np.random.choice(np.arange(0, len(testLabels)), size=(10,)):
 	prediction = probs.argmax(axis=1)
 	print("[INFO] Predicted: {}, Actual: {}".format(prediction[0],
 		np.argmax(testLabels[i])))
+	
+	#Extract the image for channels_first or channels_last
+	if K.image_data_format() == "channels_first":
+		image = (testData[i][0] * 255).astype("uint8")
+	else:
+		image = (testData[i] * 255).astype("uint8")
 
-#To save run with $python lenet_mnist.py --save-model 1 --weights output/lenet_weights.hdf5
-#To load run with $python lenet_mnist.py --load-model 1 --weights output/lenet_weights.hdf
+	#Merge the channels into one image
+	image = cv2.merge([image] * 3)
+
+	#Resize the image from 28x28 to 140x140
+	image = cv2.resize(image, (140, 140), interpolation=cv2.INTER_LINEAR)
+
+	#Show the image
+	cv2.putText(image, str(prediction[0]), (5, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
+	cv2.imshow("Digit", image)
+	cv2.waitKey(0)
+
+#To save run with $python lenet_mnist_with_cv2.py --save-model 1 --weights output/lenet_weights.hdf5
+#To load run with $python lenet_mnist_with_cv2.py --load-model 1 --weights output/lenet_weights.hdf5
