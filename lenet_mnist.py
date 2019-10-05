@@ -1,6 +1,10 @@
-#LeNet Driver Script
+#LeNet Driver Script (Copied from PyImageSearch)
 #Kieran Hobden
 #20-Sep-'19
+
+#This document is not original work but a pre-made script with minor changes made for education purposes
+#To save run with $python lenet_mnist.py --save-model 1 --weights output/lenet_weights.hdf5
+#To load run with $python lenet_mnist.py --load-model 1 --weights output/lenet_weights.hdf
 
 from lenet import LeNet
 from sklearn.model_selection import train_test_split
@@ -74,6 +78,3 @@ for i in np.random.choice(np.arange(0, len(testLabels)), size=(10,)):
 	prediction = probs.argmax(axis=1)
 	print("[INFO] Predicted: {}, Actual: {}".format(prediction[0],
 		np.argmax(testLabels[i])))
-
-#To save run with $python lenet_mnist.py --save-model 1 --weights output/lenet_weights.hdf5
-#To load run with $python lenet_mnist.py --load-model 1 --weights output/lenet_weights.hdf

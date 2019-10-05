@@ -1,6 +1,10 @@
-#LeNet Driver Script
+#LeNet Driver Script (Copied from PyImageSearch)
 #Kieran Hobden
 #23-Sep-'19
+
+#This document is not original work but a pre-made script with minor changes made for education purposes
+#To save run with $python lenet_mnist_with_cv2.py --save-model 1 --weights output/lenet_weights.hdf5
+#To load run with $python lenet_mnist_with_cv2.py --load-model 1 --weights output/lenet_weights.hdf5
 
 from lenet import LeNet
 from sklearn.model_selection import train_test_split
@@ -92,6 +96,3 @@ for i in np.random.choice(np.arange(0, len(testLabels)), size=(10,)):
 	cv2.putText(image, str(prediction[0]), (5, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
 	cv2.imshow("Digit", image)
 	cv2.waitKey(0)
-
-#To save run with $python lenet_mnist_with_cv2.py --save-model 1 --weights output/lenet_weights.hdf5
-#To load run with $python lenet_mnist_with_cv2.py --load-model 1 --weights output/lenet_weights.hdf5

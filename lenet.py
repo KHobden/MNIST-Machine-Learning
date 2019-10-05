@@ -1,6 +1,9 @@
-#Convolutional Neural Network
+#Convolutional Neural Network (Copied from PyImageSearch)
 #Kieran Hobden
 #20-Sep-'19
+
+#This document is not original work but a pre-made script with minor changes made for education purposes
+
 
 from keras.models import Sequential
 from keras.layers.convolutional import Conv2D
